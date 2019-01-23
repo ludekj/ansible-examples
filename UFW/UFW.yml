@@ -1,0 +1,20 @@
+      - name: UFW - config allow
+        ufw:
+          rule: allow #allow or deny
+          port: "{{ item }}" # multiple ports
+          proto: tcp # protocol
+        with_items:
+          - '21'
+          - '20'
+          - '40000:50000' # all from 40000 to 50000
+      - name: UFW - SSH
+        ufw:
+          rule: allow
+          port: 22
+          src: "{{ item }}"
+        with_items:
+          - '192.168.0.0/16'
+          - '10.0.0.0/8'
+      - name: Enable UFW
+        ufw:
+          state: enabled     # after enable ufw start deny all other connection   
