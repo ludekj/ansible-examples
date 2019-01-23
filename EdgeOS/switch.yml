@@ -1,0 +1,8 @@
+---
+- name: edge switch
+  connection: network_cli
+  hosts: switch
+  tasks:
+    - name: show config
+      edgeos_command:
+        

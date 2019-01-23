@@ -1,0 +1,15 @@
+---
+- name: test
+  hosts: ceragon
+  connection: local
+  gather_facts: false
+  tasks:
+  - name: test
+    telnet:
+        user: admin
+        password: admin
+        port: 23
+        login_prompt: "login: "
+        prompts:
+            - '[>|#]'
+        command: ping ipv4-address 192.168.20.1 # required. List of commands to be executed in the telnet session.
