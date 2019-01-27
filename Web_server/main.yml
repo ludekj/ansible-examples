@@ -1,0 +1,34 @@
+---
+- name: forspi web blog
+  hosts: forpsi
+  gather_facts: false
+  vars:
+    packages:
+        - apache2
+        - php7.2-curl 
+        - php7.2-gd 
+        - php7.2-json 
+        - php7.2-mbstring 
+        - php7.2-xml 
+        - php7.2-zip
+    foo_domain:
+        - 'turbotucnak.cz'
+        - 'jancik.me'    
+
+  tasks:
+    - name: instalace web
+      apt:
+        name: "{{ packages }}"
+        update_cache: yes
+    - name: apache 2 config
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: 'Listen 8080'
+        backup: yes
+    - name: config for domain
+      template:
+        src: /mnt/d/git/ansible-examples/Web_server/apache2.j2
+        dest: /etc/apache2/sites-available/{{ foo_domain }}.conf
+        
