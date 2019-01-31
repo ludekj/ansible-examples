@@ -1,0 +1,6 @@
+<VirtualHost *:8080>
+    ServerAdmin ludek@jancik.me
+    DocumentRoot /var/www/{{ foo_domain }}.conf
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

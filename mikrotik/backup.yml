@@ -13,3 +13,11 @@
       copy:
         content: "{{ foo_stdout.stdout }}"
         dest: /mnt/c/git/ansible-examples/mikrotik/backups/test.txt 
+  hosts: 192.168.1.117
+  tasks:
+    - name: export config
+      routeros_command: 
+        commands: export
+    - name: show
+      debug:
+        msg: "{{ stdout }}" 
